@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$(dirname "$BASH_SOURCE")/../init/init.sh"
+source "../../init/init.sh"
 
 MOUNT_POINT="/mnt/bryantnas"
 NAS_IP="192.168.86.44"
