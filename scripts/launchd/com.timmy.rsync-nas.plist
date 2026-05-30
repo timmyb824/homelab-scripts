@@ -1,0 +1,26 @@
+<!-- ~/Library/LaunchAgents/com.timmy.rsync-nas.plist -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.timmy.rsync-nas</string>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HC_PING_ID</key>
+    <string>{HC_PING_ID}</string>
+  </dict>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/timothybryant/DEV/homelab/homelab-scripts/scripts/nas/sync_to_nas.sh</string>
+  </array>
+  <key>StartInterval</key>
+  <integer>1800</integer>
+  <key>StandardOutPath</key>
+  <string>/tmp/rsync-nas.log</string>
+  <key>StandardErrorPath</key>
+  <string>/tmp/rsync-nas-err.log</string>
+</dict>
+</plist>

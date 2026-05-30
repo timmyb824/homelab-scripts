@@ -1,5 +1,4 @@
 #!/bin/bash
 
-rsync -av --delete /Users/timothybryant/DEV/projects/ /Volumes/filebrowser/macbook-projects/
-rsync -av --delete /Users/timothybryant/Documents/notes/ /Volumes/filebrowser/machook-homelab/
-# add more as needed
+rsync -av --delete /Users/timothybryant/DEV/projects/ /Volumes/filebrowser/macbook-projects/ &&
+    curl -m 10 --retry 5 "https://healthchecks.timmybtech.com/ping/${HC_PING_ID}"
