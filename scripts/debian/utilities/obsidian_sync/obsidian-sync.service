@@ -1,0 +1,9 @@
+[Unit]
+Description=Obsidian vault inbound sync
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=tbryant
+EnvironmentFile=/home/tbryant/.hermes/.env
+ExecStart=/usr/local/bin/obsidian-sync in

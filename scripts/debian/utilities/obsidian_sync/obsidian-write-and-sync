@@ -1,0 +1,5 @@
+#!/bin/bash
+# Hermes calls this after any note write
+# Usage: obsidian-write-and-sync <file> <content>
+"$@"
+/usr/local/bin/obsidian-sync out

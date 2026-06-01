@@ -1,0 +1,52 @@
+#!/bin/bash
+# Bidirectional rclone sync for Obsidian vault
+# Usage: obsidian-sync [in|out]
+
+REMOTE="rustfs:obsidian/PERSONAL"
+LOCAL="${OBSIDIAN_VAULT_PATH:-$HOME/notes}"
+LOCKFILE="/tmp/obsidian-sync.lock"
+HC_URL="${HEALTHCHECKS_OBSIDIAN_URL:-}"
+BACKUP_DIR="$HOME/.obsidian-backups/$(date +%Y%m%d-%H%M%S)"
+
+log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*"; }
+
+# Prevent overlapping syncs
+if [ -f "$LOCKFILE" ]; then
+    log "Sync already in progress, skipping"
+    exit 0
+fi
+touch "$LOCKFILE"
+trap "rm -f $LOCKFILE" EXIT
+
+Direction="${1:-in}"
+
+case "$Direction" in
+in)
+    log "Syncing in from S3..."
+    rclone sync "$REMOTE/" "$LOCAL/" \
+        --backup-dir "$BACKUP_DIR" \
+        --log-level INFO
+    ;;
+out)
+    log "Syncing out to S3..."
+    rclone sync "$LOCAL/" "$REMOTE/" \
+        --log-level INFO
+    ;;
+*)
+    log "Unknown direction: $Direction"
+    exit 1
+    ;;
+esac
+
+STATUS=$?
+
+if [ -n "$HC_URL" ]; then
+    if [ $STATUS -eq 0 ]; then
+        curl -fsS "$HC_URL" >/dev/null
+    else
+        curl -fsS "$HC_URL/fail" >/dev/null
+    fi
+fi
+
+log "Sync ($Direction) complete, status: $STATUS"
+exit $STATUS
