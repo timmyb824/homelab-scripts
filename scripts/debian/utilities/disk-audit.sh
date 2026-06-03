@@ -424,7 +424,7 @@ for target_pri in HIGH MEDIUM LOW; do
     echo "    ${REC_EXPLANATIONS[$i]}"
     echo ""
     echo -e "    ${BOLD}Commands:${RESET}"
-    printf '%s\n' "${REC_COMMANDS[$i]}" | sed 's/^/    /'
+    printf '%b\n' "${REC_COMMANDS[$i]}" | sed 's/^/    /'
   done
 done
 
