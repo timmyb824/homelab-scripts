@@ -2,9 +2,9 @@
 set -euo pipefail
 
 LOG=/tmp/pihole2_home_backup.log
-PING_URL="https://healthchecks.timmybtech.com/ping/$HOME_TBRYANT_BACKUP_HEALTHCHECK_ID"￼
+PING_URL="https://healthchecks.timmybtech.com/ping/$HOME_TBRYANT_BACKUP_HEALTHCHECK_ID"
 
-rsync -a --delete /home/tbryant/ /mnt/bryantnas/pihole2_backups/home_tbryant/ >>"$LOG" 2>&1
+sudo rsync -a --delete /home/tbryant/ /mnt/bryantnas/pihole2_backups/home_tbryant/ >>"$LOG" 2>&1
 status=$?
 
 # Always ping, with exit status
