@@ -6,7 +6,7 @@ REMOTE="rustfs:obsidian/PERSONAL"
 LOCAL="${OBSIDIAN_VAULT_PATH:-$HOME/notes}"
 LOCKFILE="/tmp/obsidian-sync.lock"
 HC_URL="${HEALTHCHECKS_OBSIDIAN_URL:-}"
-BACKUP_DIR="$HOME/.obsidian-backups/$(date +%Y%m%d-%H%M%S)"
+BACKUP_DIR="/home/tbryant/.obsidian-backups/$(date +%Y%m%d-%H%M%S)"
 
 log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*"; }
 
