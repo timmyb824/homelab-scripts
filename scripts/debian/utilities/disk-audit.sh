@@ -55,7 +55,7 @@ require_root() {
 size_mb() {
   local path="$1"
   [[ -e "$path" ]] || { echo 0; return; }
-  du -sm "$path" 2>/dev/null | awk '{print int($1)}'
+  du -xsm "$path" 2>/dev/null | awk '{print int($1)}'
 }
 
 # Colorised human size
@@ -77,7 +77,7 @@ hsize() {
 drill() {
   local dir="$1" depth="${2:-2}"
   [[ -d "$dir" ]] || return 0
-  du -h --max-depth="$depth" "$dir" 2>/dev/null \
+  du -xh --max-depth="$depth" "$dir" 2>/dev/null \
     | grep -v "^0\s" | sort -rh | head -n "$TOP_N" \
     | awk '{printf "    %-12s %s\n", $1, $2}'
 }
@@ -105,7 +105,7 @@ done < <(df --output=pcent,target 2>/dev/null | tail -n +2 | grep -Ev "tmpfs|ude
 
 # ── 2. Top-Level Breakdown ───────────────────────────────────────────────────
 section "Top-Level Directory Sizes ( / )"
-du -h --max-depth=1 / 2>/dev/null \
+du -xh --max-depth=1 / 2>/dev/null \
   | grep -v "^0" | sort -rh | head -n "$TOP_N" \
   | awk '{printf "  %-12s %s\n", $1, $2}'
 
