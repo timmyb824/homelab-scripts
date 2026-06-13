@@ -1,6 +1,21 @@
 #!/bin/bash
 
-source ../init/init.sh
+msg_info() {
+    echo -e "\033[1;34m[INFO]\033[0m $1"
+}
+
+msg_ok() {
+    echo -e "\033[1;32m[OK]\033[0m $1"
+}
+
+msg_error() {
+    echo -e "\033[1;31m[ERROR]\033[0m $1"
+}
+
+handle_error() {
+    msg_error "$1"
+    exit 1
+}
 
 # Function to disable the timer and service
 disable_timer_and_service() {
