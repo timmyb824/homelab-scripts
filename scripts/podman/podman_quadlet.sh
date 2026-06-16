@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source ../init/common.sh
-
 QUADLET_DIR="$HOME/.config/containers/systemd"
 GENERATED_DIR="/run/user/$(id -u)/systemd/generator"
 
@@ -18,6 +16,26 @@ usage() {
   echo "  $0 delete network mynet"
   echo "  $0 recreate container myapp"
   exit 1
+}
+
+# ---------------------------------------------------------------------------
+# Create Utilities
+# ---------------------------------------------------------------------------
+
+msg_info() {
+    echo -e "\033[1;34m[INFO]\033[0m $1"
+}
+
+msg_ok() {
+    echo -e "\033[1;32m[OK]\033[0m $1"
+}
+
+msg_warn() {
+    echo -e "\033[1;33m[WARN]\033[0m $1"
+}
+
+msg_error() {
+    echo -e "\033[1;31m[ERROR]\033[0m $1"
 }
 
 # ---------------------------------------------------------------------------
