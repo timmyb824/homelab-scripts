@@ -6,6 +6,16 @@ source "$(dirname "$BASH_SOURCE")/../../init/init.sh"
 
 PYTHON_VERSIONS=("3.13" "3.12" "3.11")
 
+remove_pyenv() {
+    if command_exists pyenv; then
+        msg_info "Removing pyenv."
+        if [ -d ~/.pyenv ]; then
+            rm -rf ~/.pyenv
+            msg_ok "pyenv removed successfully."
+        fi
+    fi
+}
+
 install_uv() {
     msg_info "Installing uv..."
     if command_exists curl; then
@@ -37,6 +47,8 @@ install_python_versions() {
 }
 
 main() {
+    remove_pyenv
+
     if ! command_exists uv; then
         install_uv
     else
