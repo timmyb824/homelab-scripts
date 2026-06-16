@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source common.sh
+source ../init/common.sh
 
 QUADLET_DIR="$HOME/.config/containers/systemd"
 GENERATED_DIR="/run/user/$(id -u)/systemd/generator"
